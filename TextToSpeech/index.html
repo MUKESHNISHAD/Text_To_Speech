@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text-to-Speech</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: rgb(49, 50, 50);
+            font-family: Arial, sans-serif;
+            background-image: url('your-background-image.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        #textbox {
+            resize: none;
+            border-radius: 7%;
+        }
+
+        #speakbtn {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            border-radius: 20px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        #speakbtn:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .base {
+            height: 20px;
+            width: 100%;
+            background-color: rgb(133, 133, 195);
+        }
+
+        .progress {
+            background-color: green;
+            height: 20px;
+            width: 0%;
+        }
+
+        .check {
+            margin-left: 40%;
+            margin-top: 10%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="base">
+        <div class="progress"></div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="text-center mb-4">
+                    <h2 class="mb-3">Text-to-Speech Converter</h2>
+                    <i class="fas fa-volume-up fa-3x text-primary"></i>
+                </div>
+
+                <div class="form-group">
+                    <label for="textbox">Enter Text:</label>
+                    <textarea id="textbox" class="form-control" rows="4">Hello, my Name is Mukesh Nishad </textarea>
+                </div>
+                <button id="speakbtn" class="btn btn-primary" onclick="speak()">Speak</button>
+            </div>
+        </div>
+        <h1 class="check"></h1>
+
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<script>
+
+    var tg = document.querySelector('.base');
+    var progress = tg.querySelector('.progress');
+    function infoFileLoader() {
+        let synth = window.speechSynthesis;
+        let voice = new SpeechSynthesisUtterance(textbox.value);
+        voice.rate = 0.5;
+        synth.speak(voice);
+        tg.removeChild(progress);
+    }
+    function speak() {
+        tg.appendChild(progress);
+        document.getElementsByClassName('check')[0].innerHTML = "Please Wait...";
+        var pro = document.getElementsByClassName('progress')[0];
+        var width = 0;
+        var Timer = setInterval(() => {
+            width += 1;
+            pro.style.width = width + '%';
+            if (width >= 100) {
+                clearInterval(Timer);
+                document.getElementsByClassName('check')[0].innerHTML = "Sucess!!";
+                infoFileLoader();
+            }
+        }, 20);
+    }
+
+
+</script>
+
+</html>
