@@ -42,14 +42,14 @@
         }
 
         .base {
-            height: 20px;
+            height: 15px;
             width: 100%;
             background-color: rgb(133, 133, 195);
         }
 
         .progress {
             background-color: green;
-            height: 20px;
+            height: 15px;
             width: 0%;
         }
 
@@ -101,7 +101,7 @@
     }
     function speak() {
         tg.appendChild(progress);
-        document.getElementsByClassName('check')[0].innerHTML = "Please Wait...";
+        document.getElementsByClassName('check')[0].innerHTML = "Processing...";
         var pro = document.getElementsByClassName('progress')[0];
         var width = 0;
         var Timer = setInterval(() => {

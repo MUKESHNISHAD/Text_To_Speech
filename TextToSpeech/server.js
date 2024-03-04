@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 
-app.post('*', (req, res) => {
+app.get('*', (req, res) => {
     fs.readFile('./index.html', (err, data) => {
         if (err) {
             console.log(err);
